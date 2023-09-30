@@ -12,7 +12,7 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const { name, email, password } = formData;
 
-  function onChange(e) {
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target!.value,

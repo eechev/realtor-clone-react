@@ -5,7 +5,7 @@ import OAuth from '../components/OAuth';
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
 
-  function onChange(e) {
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
   }
 

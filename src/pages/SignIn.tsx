@@ -11,7 +11,7 @@ export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const { email, password } = formData;
 
-  function onChange(e) {
+  function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target!.value,
