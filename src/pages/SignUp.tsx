@@ -22,8 +22,7 @@ export default function SignUp() {
   interface User {
     name: string;
     email: string;
-    password?: string;
-    timestamp?: FieldValue;
+    timestamp: FieldValue;
   }
   const navigate = useNavigate();
 
@@ -59,9 +58,12 @@ export default function SignUp() {
 
       //add user to user database
       const user = userCredentials.user;
-      const { ...newUser }: User = formData;
-      delete newUser.password;
-      newUser.timestamp = serverTimestamp();
+
+      const newUser: User = {
+        name: formData.name,
+        email: formData.email,
+        timestamp: serverTimestamp(),
+      };
 
       await setDoc(doc(db, 'users', user.uid), newUser);
       toast.success('Sign up was successful');
