@@ -7,14 +7,8 @@ import {
   getAuth,
   updateProfile,
 } from 'firebase/auth';
-import {
-  FieldValue,
-  doc,
-  getFirestore,
-  serverTimestamp,
-  setDoc,
-} from 'firebase/firestore';
-import { app } from '../firebase';
+import { FieldValue, doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 import OAuth from '../components/OAuth';
 import { toast } from 'react-toastify';
 
@@ -25,8 +19,6 @@ export default function SignUp() {
     timestamp: FieldValue;
   }
   const navigate = useNavigate();
-
-  const db = getFirestore(app);
 
   const [formData, setFormData] = useState({
     name: '',

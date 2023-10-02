@@ -2,17 +2,10 @@ import { FcGoogle } from 'react-icons/fc';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import {
-  doc,
-  getDoc,
-  getFirestore,
-  serverTimestamp,
-  setDoc,
-} from 'firebase/firestore';
-import { app } from '../firebase';
+import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 export default function OAuth() {
-  const db = getFirestore(app);
   const navigate = useNavigate();
 
   async function onGoogleClick() {
