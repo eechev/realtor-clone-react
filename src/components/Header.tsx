@@ -68,6 +68,8 @@ export default function Header() {
                   ? 'text-black border-b-red-500'
                   : ' text-gray-400 border-b-transparent'
               }`}
+              //this on click can also just point to profile and when user is not logged in the router will
+              //automatically sent it to sign in but I like to be implicit.
               onClick={() => {
                 pageState === 'Sign in'
                   ? navigate('/sign-in')
