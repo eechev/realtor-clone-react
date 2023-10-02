@@ -1,12 +1,28 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setEmail(e.target.value);
+  }
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
+      toast.success('Email was sent');
+      navigate('/');
+    } catch (error) {
+      toast.error('Failed to submit request');
+    }
   }
 
   return (
@@ -21,7 +37,7 @@ export default function ForgotPassword() {
           />
         </div>
         <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-20'>
-          <form>
+          <form onSubmit={onSubmit}>
             <input
               className='w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-6'
               type='email'
@@ -52,15 +68,15 @@ export default function ForgotPassword() {
             <button
               type='submit'
               className='w-full bg-blue-600 text-white px-7 py-3 
-            text-sm font-medium uppercase rounded shadow-md hover:bg-blue-700 
-            transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800'
+                         text-sm font-medium uppercase rounded shadow-md hover:bg-blue-700 
+                         transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800'
             >
               Send reset password
             </button>
             <div
               className='flex my-4 items-center 
-          before:border-t before:flex-1 before:border-gray-300
-          after:border-t after:flex-1 after:border-gray-300'
+                         before:border-t before:flex-1 before:border-gray-300
+                         after:border-t after:flex-1 after:border-gray-300'
             >
               <p className='text-center font-semibold mx-4'>OR</p>
             </div>
